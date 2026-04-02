@@ -3,11 +3,19 @@
 import * as React from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
-import { Controller, FormProvider, useFormContext } from "react-hook-form";
+import {
+  Controller,
+  type ControllerProps,
+  type FieldValues,
+  FormProvider,
+  useFormContext,
+} from "react-hook-form";
 
 export const Form = FormProvider;
 
-export function FormField({ ...props }) {
+export function FormField<TFieldValues extends FieldValues>(
+  props: ControllerProps<TFieldValues>,
+) {
   return <Controller {...props} />;
 }
 
