@@ -1,34 +1,32 @@
 "use client";
 
-import z from "zod";
-import { Textarea } from "../ui/textarea";
+import { z } from "zod";
+import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useTransition } from "react";
-import createPost, { updatePost } from "@/actions/post-actions";
+import { useTransition } from "react";
+import { createPost, updatePost } from "@/actions/post-actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+//post form schema for validation
 const postSchema = z.object({
   title: z
     .string()
-    .min(3, "atleast 3 characters long")
-    .max(255, "must be less than 255 characters"),
-
+    .min(3, "Title must be at least 2 characters long")
+    .max(255, "Title must be less than 255 characters"),
   description: z
     .string()
-    .min(5, "atleast 5 characters long")
-    .max(255, "must be less than 255 characters"),
-
-  content: z.string().min(10, "atleast 10 characters long"),
+    .min(5, "Description must be at least 2 characters long")
+    .max(255, "Description must be less than 255 characters"),
+  content: z.string().min(10, "Description must be at least 2 characters long"),
 });
 
-type PostFormValues = z.infer<typeof postSchema>;
-
 interface PostFormProps {
-  isEditing: boolean;
+  isEditing?: boolean;
   post?: {
     id: number;
     title: string;
@@ -38,9 +36,12 @@ interface PostFormProps {
   };
 }
 
+type PostFormValues = z.infer<typeof postSchema>;
+
 function PostForm({ isEditing, post }: PostFormProps) {
-  const [isPending, setIsPending] = useTransition();
+  const [isPending, startTranstion] = useTransition();
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -62,7 +63,7 @@ function PostForm({ isEditing, post }: PostFormProps) {
   });
 
   const onFormSubmit = async (data: PostFormValues) => {
-    startTransition(async () => {
+    startTranstion(async () => {
       try {
         const formData = new FormData();
         formData.append("title", data.title);
@@ -77,15 +78,20 @@ function PostForm({ isEditing, post }: PostFormProps) {
           res = await createPost(formData);
         }
 
+        console.log(res, "res");
+
         if (res.success) {
           toast(
-            isEditing ? "Post Edited successfuly" : "Post created successfully",
+            isEditing
+              ? "Post edited successfully"
+              : "Post created successfully",
           );
+          router.refresh();
           router.push("/");
         } else {
           toast(res.message);
         }
-      } catch (error) {
+      } catch (e) {
         toast("Failed to create post");
       }
     });
@@ -93,11 +99,11 @@ function PostForm({ isEditing, post }: PostFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
-      <div className="sapce-y-2">
-        <label htmlFor="title">Title </label>
+      <div className="space-y-2">
+        <Label htmlFor="title">Title</Label>
         <Input
           id="title"
-          placeholder="Enter your title..."
+          placeholder="Enter post title"
           {...register("title")}
           disabled={isPending}
         />
@@ -105,11 +111,11 @@ function PostForm({ isEditing, post }: PostFormProps) {
           <p className="text-sm text-red-700">{errors.title.message}</p>
         )}
       </div>
-      <div className="sapce-y-2">
-        <label htmlFor="description">Description </label>
+      <div className="space-y-2">
+        <Label htmlFor="description">Description</Label>
         <Textarea
           id="description"
-          placeholder="Enter your description..."
+          placeholder="Enter a short post description"
           {...register("description")}
           disabled={isPending}
         />
@@ -117,12 +123,12 @@ function PostForm({ isEditing, post }: PostFormProps) {
           <p className="text-sm text-red-700">{errors.description.message}</p>
         )}
       </div>
-      <div className="sapce-y-2">
-        <label htmlFor="content">Content </label>
+      <div className="space-y-2">
+        <Label htmlFor="content">Description</Label>
         <Textarea
           id="content"
-          placeholder="Enter your content..."
-          className="min-h-62.5 resize-none"
+          placeholder="Enter post content"
+          className="min-h-[50vh] resize-none"
           {...register("content")}
           disabled={isPending}
         />

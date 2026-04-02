@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { success } from "zod";
 
-export default async function createPost(formData: FormData) {
+export async function createPost(formData: FormData) {
   try {
     const session = await auth.api.getSession({
       headers: await headers(),

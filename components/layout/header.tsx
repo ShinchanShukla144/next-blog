@@ -18,7 +18,7 @@ function Header() {
     },
     {
       label: "Create",
-      href: "post/create",
+      href: "/post/create",
     },
   ];
 
