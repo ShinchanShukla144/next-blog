@@ -5,7 +5,7 @@ import { getSessionCookie } from "better-auth/cookies";
 
 const protectedRoutes = ["/profile", "/post/create", "/post/edit"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
 
   const session = getSessionCookie(request);
