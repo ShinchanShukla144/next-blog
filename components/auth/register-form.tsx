@@ -71,7 +71,7 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
         <FormField
           control={form.control}
           name="name"
-          render={({ field }) => (
+          render={({ field }: any) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
@@ -84,7 +84,7 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
         <FormField
           control={form.control}
           name="email"
-          render={({ field }) => (
+          render={({ field }: any) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
@@ -97,7 +97,7 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
         <FormField
           control={form.control}
           name="password"
-          render={({ field }) => (
+          render={({ field }: any) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
@@ -114,7 +114,7 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
         <FormField
           control={form.control}
           name="confirmPassword"
-          render={({ field }) => (
+          render={({ field }: any) => (
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>

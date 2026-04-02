@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -63,7 +63,7 @@ function LoginForm() {
         <FormField
           control={form.control}
           name="email"
-          render={({ field }) => (
+          render={({ field }: any) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
@@ -79,7 +79,7 @@ function LoginForm() {
         <FormField
           control={form.control}
           name="password"
-          render={({ field }) => (
+          render={({ field }: any) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
