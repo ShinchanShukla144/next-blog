@@ -12,7 +12,7 @@ function CreatePostPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <PostForm />
+            <PostForm isEditing />
           </CardContent>
         </Card>
       </div>
