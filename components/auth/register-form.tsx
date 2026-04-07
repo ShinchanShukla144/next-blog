@@ -78,7 +78,7 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
                 <Input placeholder="Enter your name ..." {...field} />
               </FormControl>
               <p className="text-red-500 text-sm">
-                {form.formState.errors.password?.message}
+                {form.formState.errors.name?.message}
               </p>
             </FormItem>
           )}
@@ -93,7 +93,7 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
                 <Input placeholder="Enter your email ..." {...field} />
               </FormControl>
               <p className="text-red-500 text-sm">
-                {form.formState.errors.password?.message}
+                {form.formState.errors.email?.message}
               </p>
             </FormItem>
           )}
