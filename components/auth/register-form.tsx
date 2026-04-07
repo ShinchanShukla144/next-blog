@@ -77,7 +77,9 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
               <FormControl>
                 <Input placeholder="Enter your name ..." {...field} />
               </FormControl>
-              {form.formState.errors.name?.message}
+              <p className="text-red-500 text-sm">
+                {form.formState.errors.password?.message}
+              </p>
             </FormItem>
           )}
         />
@@ -90,7 +92,9 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
               <FormControl>
                 <Input placeholder="Enter your email ..." {...field} />
               </FormControl>
-              {form.formState.errors.email?.message}
+              <p className="text-red-500 text-sm">
+                {form.formState.errors.password?.message}
+              </p>
             </FormItem>
           )}
         />
@@ -107,7 +111,9 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
                   {...field}
                 />
               </FormControl>
-              {form.formState.errors.password?.message}
+              <p className="text-red-500 text-sm">
+                {form.formState.errors.password?.message}
+              </p>
             </FormItem>
           )}
         />
@@ -124,7 +130,9 @@ function RegisterForm({ onSuccess }: RegisterFormProps) {
                   {...field}
                 />
               </FormControl>
-              {form.formState.errors.confirmPassword?.message}
+              <p className="text-red-500 text-sm">
+                {form.formState.errors.password?.message}
+              </p>
             </FormItem>
           )}
         />
